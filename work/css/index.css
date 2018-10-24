@@ -1,0 +1,46 @@
+.nav_1{
+	width: 100%;
+	height: 14%;
+	margin:0 auto;
+}
+.nav_a{
+	margin-left: 150px;
+}
+
+.img_1{
+	width: 80px;
+	height: 100%;
+}
+/* 这里有两种写法  一种是用display：inline 去除掉block 可以把这个写到comment.css里面 */
+/* 还有一种是用float  两种方式  但是不推荐使用float 可以用 但不要滥用 可以自己去网上搜一下 具体的效果  等你看完
+我再详细跟你说 为什么不能滥用 坏处和好处*/
+.nav_span{
+	width: 60%;
+	height: 100%;
+	float: right;
+	margin-right:10%;
+}
+
+.nav_ul{
+	display:inline;
+}
+
+/*.nav_ul{
+	float: right;
+}*/
+.nav_ul li{
+	width: 10%;
+	height: 100%;
+	margin-left: 10%;
+	float: left;
+	background-color: #fff;
+	text-align: center;
+}
+.nav_ul li a img{
+	width: 30px;
+	height: 30px;
+	margin-top: 10px;
+}
+.nav_ul li:hover{
+	background-color: #57abe8;
+}

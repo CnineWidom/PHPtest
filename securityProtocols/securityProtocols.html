@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>安全协议测试</title>
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="./encryption.js"></script>
+</head>
+<body>
+	<input type="button" id='sub_1' value="上传">
+</body>
+</html>
+<script>
+	$(function(){
+		var tiemstamp=(new Date().getTime());
+		var rand=get_rand(20);
+		var TOKEN='API';
+		var signature=get_artical(tiemstamp,rand,TOKEN)
+		$("#sub_1").click(function(){
+			$.ajax({
+				url:'http://localhost/test/securityProtocols/securityProtocols.php',
+				dataType:'json',
+				type:'get',
+				data:{
+					't':tiemstamp,
+					'r':rand,
+					's':signature
+				},
+				success:function(res){
+					console.log(tiemstamp)
+					console.log(res)
+				}
+			})
+		})
+		
+	})
+	//返回随机字符串
+	function get_rand(length=8){
+		var char='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+		var strlen=char.length;
+		var cons='';
+		for (var i = 0; i <length; i++) {
+			cons+=char.substr(Math.random(0,1)*strlen,1);
+		}
+		return cons;
+	}
+	//生成签名 签名规则可以自己实现
+	function get_artical(timeStamp,randstr,TOKEN){
+		var arr=new Array();
+		arr=[timeStamp,randstr,TOKEN]
+		arr.sort()
+		var str=arr.join(',');
+		str = str.replace(/,/g, "");
+		str=hex_sha1(str);
+		str=hex_md5(str)
+		signature=str.toUpperCase();
+		return signature;
+	}
+</script>
